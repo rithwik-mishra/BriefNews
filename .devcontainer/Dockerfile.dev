@@ -1,0 +1,42 @@
+# Development stage
+FROM python:3.10-slim
+
+# Install Node.js and npm
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Create non-root user
+RUN useradd -m -u 1000 appuser
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements files
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application
+COPY . .
+
+# Set permissions
+RUN chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose ports for Angular and FastAPI
+EXPOSE 4200 8000
+
+# Environment variables
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+# Command to run the development servers
+CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload & ng serve --host 0.0.0.0 --port 4200"] 

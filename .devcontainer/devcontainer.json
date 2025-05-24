@@ -1,0 +1,38 @@
+{
+    "name": "Angular FastAPI ML Development",
+    "dockerFile": "../Dockerfile",
+    "forwardPorts": [4200, 8000],
+    "postCreateCommand": "pip install -r requirements.txt && npm install && ng config -g cli.warnings.versionMismatch false",
+    "remoteUser": "vscode",
+    "runArgs": [
+        "--env-file",
+        ".env"
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.analysis.extraPaths": [
+                    "/app/backend"
+                ],
+                "python.analysis.typeCheckingMode": "basic",
+                "python.analysis.diagnosticMode": "workspace",
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": true
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "dbaeumer.vscode-eslint",
+                "angular.ng-template",
+                "ms-azuretools.vscode-docker",
+                "amazonwebservices.aws-toolkit-vscode"
+            ]
+        }
+    }
+} 
