@@ -1,8 +1,11 @@
 {
     "name": "Angular FastAPI ML Development",
     "dockerFile": "../Dockerfile",
-    "forwardPorts": [4200, 8000],
-    "postCreateCommand": "pip install -r requirements.txt && npm install && ng config -g cli.warnings.versionMismatch false",
+    "forwardPorts": [
+        4200,
+        8000
+    ],
+    "postCreateCommand": "pip3 install -r requirements.txt && npm install && ng config -g cli.warnings.versionMismatch false",
     "remoteUser": "vscode",
     "runArgs": [
         "--env-file",
@@ -35,4 +38,4 @@
             ]
         }
     }
-} 
+}

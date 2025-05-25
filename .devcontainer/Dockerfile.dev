@@ -18,9 +18,11 @@ WORKDIR /app
 
 # Copy requirements files
 COPY requirements.txt .
+COPY backend/requirements.txt backend/requirements.txt
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r backend/requirements.txt
 
 # Copy the rest of the application
 COPY . .
@@ -39,4 +41,4 @@ ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 
 # Command to run the development servers
-CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload & ng serve --host 0.0.0.0 --port 4200"] 
+CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload & ng serve --host 0.0.0.0 --port 4200"]

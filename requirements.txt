@@ -10,4 +10,8 @@ python-multipart==0.0.6
 python-jose==3.3.0
 passlib==1.7.4
 bcrypt==4.0.1
-python-dotenv==1.0.0 
+python-dotenv==1.0.0
+lxml==5.4.0
+lxml_html_clean==0.4.2
+newspaper3k==0.2.8
+sqlalchemy==2.0.41
