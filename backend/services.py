@@ -11,14 +11,13 @@ class SummaryAPIService:
         init_db()
         self.db = get_db_connection()
 
-    def save_article(self, title: str, url: str, summary: str, authors: str, published_date: str) -> Article:
+    def save_article(self, title: str, url: str, summary: str, authors: str) -> Article:
         """Save an article to the database"""
         article = Article(
             title=title,
             url=url,
             summary=summary,
             authors=authors,
-            published_date=published_date
         )
         self.db.add(article)
         self.db.commit()
@@ -43,7 +42,6 @@ class SummaryAPIService:
                     url=article.url,
                     summary=article.summary,
                     authors=", ".join(article.authors) if article.authors else "",
-                    published_date=article.publish_date
                 )
                 print(f"Saved article: {article.title}")
             except Exception as e:
@@ -68,7 +66,6 @@ class SummaryAPIService:
                     url=article.url,
                     summary=article.summary,
                     authors=", ".join(article.authors) if article.authors else "",
-                    published_date=article.publish_date
                 )
                 print(f"Saved article: {article.title}")
             except Exception as e:
@@ -77,4 +74,6 @@ class SummaryAPIService:
 
     def get_all_articles(self) -> List[Article]:
         """Retrieve all articles from the database"""
+        self.guardian_crawler()
+        self.cnn_crawler()
         return self.db.query(Article).all()

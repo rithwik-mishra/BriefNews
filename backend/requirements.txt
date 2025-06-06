@@ -1,6 +1,0 @@
-fastapi 
-transformers
-newspaper3k
-lxml
-pydantic
-pytest

@@ -1,6 +1,6 @@
 """FastAPI main entry point"""
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Depends
 from pydantic import BaseModel, Field
 from typing import Annotated, Literal, TypeAlias, List
 from .services import SummaryAPIService
@@ -57,6 +57,8 @@ class ArticleOutput(BaseModel):
         Field(description="The URL of the original news article")
     ]
 
+APIServiceDI: TypeAlias = Annotated[SummaryAPIService, Depends()]
+
 # Routes:
 @app.post(
         "/summarize",
@@ -64,12 +66,12 @@ class ArticleOutput(BaseModel):
         summary="Sends news article URL as payload to the summarize function and returns a summary and sentiment analysis of the chosen article.",
         tags=["Routes"]
         )
-async def summarize_article():
+async def summarize_article(api_service: APIServiceDI):
     pass
 
-@app.get("/random", summary="Gets the title, summary, sentiment, and URL of a random current news article.", tags=["Routes"])
-async def get_random_article():
-    pass
+@app.get("/articles", summary="Gets all articles from the database.", tags=["Routes"])
+async def get_all_articles(api_service: APIServiceDI):
+    return api_service.get_all_articles()
 
 
 
