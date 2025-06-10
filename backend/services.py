@@ -1,79 +1,57 @@
 """Business Logic Services for the BriefNews API"""
 import newspaper
 from typing import List, Dict
-from .database import get_db_connection, Article, init_db
+from .models import ArticleOutput, ArticleURLInput
 
 class SummaryAPIService:
     """Summarizer service meant to interface with API to extract article informations, generate a summary, and provide a sentiment analysis."""
 
+    articles: List[ArticleOutput]  # List to store articles
     def __init__(self):
-        # Initialize database
-        init_db()
-        self.db = get_db_connection()
+        """Initialize the SummaryAPIService"""
+        self.articles = []
 
-    def save_article(self, title: str, url: str, summary: str, authors: str) -> Article:
-        """Save an article to the database"""
-        article = Article(
-            title=title,
-            url=url,
-            summary=summary,
-            authors=authors,
-        )
-        self.db.add(article)
-        self.db.commit()
-        self.db.refresh(article)
-        return article
+    def is_updated(self) -> bool:
+        """Check if the articles are updated and from today's date"""
+        if not self.articles:
+            return False
+        return self.articles[0].
 
     def guardian_crawler(self):
         """Crawl articles from The Guardian and save them to database"""
         guardian = newspaper.build("https://www.theguardian.com/international")
         # Get details of the most recent 15 articles from the international topic
-        i = 0
-        while i < 15 and i < len(guardian.articles):
+        for i in range(25):
             article = guardian.articles[i]
-            try:
-                # Download and parse the article
-                article.download()
-                article.parse()
-                
-                # Save to database
-                self.save_article(
-                    title=article.title,
-                    url=article.url,
-                    summary=article.summary,
-                    authors=", ".join(article.authors) if article.authors else "",
-                )
-                print(f"Saved article: {article.title}")
-            except Exception as e:
-                print(f"Error processing article {article.url}: {str(e)}")
-            i += 1
+            ouput = ArticleOutput(
+                title=article.title,
+                authors=article.authors,
+                summary="", # Placeholder for summary generation
+                sentiment="neutral",  # Placeholder for sentiment analysis
+                url=article.source_url
+                date=article.publish_date if article.publish_date else None
+            )
+            self.articles.append(ouput)
         
     def cnn_crawler(self):
         """Crawl articles from The Guardian and save them to database"""
         cnn = newspaper.build("https://edition.cnn.com")
         # Get details of the most recent 15 articles from the CNN mobile site
-        i = 0
-        while i < 15 and i < len(cnn.articles):
+        for i in range(25):
             article = cnn.articles[i]
-            try:
-                # Download and parse the article
-                article.download()
-                article.parse()
-                
-                # Save to database
-                self.save_article(
-                    title=article.title,
-                    url=article.url,
-                    summary=article.summary,
-                    authors=", ".join(article.authors) if article.authors else "",
-                )
-                print(f"Saved article: {article.title}")
-            except Exception as e:
-                print(f"Error processing article {article.url}: {str(e)}")
-            i += 1
+            ouput = ArticleOutput(
+                title=article.title,
+                authors=article.authors,
+                summary="", # Placeholder for summary generation
+                sentiment="neutral",  # Placeholder for sentiment analysis
+                url=article.source_url
+            )
+            self.articles.append(ouput)
 
-    def get_all_articles(self) -> List[Article]:
+    def get_all_articles(self) -> List[ArticleOutput]:
         """Retrieve all articles from the database"""
-        self.guardian_crawler()
-        self.cnn_crawler()
-        return self.db.query(Article).all()
+        return self.articles
+
+    def summarize_article(self, article_input: ArticleURLInput) -> ArticleOutput:
+        """Summarize the article and return the output"""
+        pass

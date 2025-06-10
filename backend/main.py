@@ -1,16 +1,29 @@
 """FastAPI main entry point"""
 
 from fastapi import FastAPI, HTTPException, status, Depends
-from pydantic import BaseModel, Field
 from typing import Annotated, Literal, TypeAlias, List
 from .services import SummaryAPIService
+from contextlib import asynccontextmanager
+from .models import ArticleURLInput, ArticleOutput
+
+# Startup event lifespan to initialize database with current news articles from today
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan event to initialize the application"""
+    # Check if articles are present and from todays date, if not crawl and populate the database
+    api_service = SummaryAPIService()
+    if not SummaryAPIService.articles or not SummaryAPIService.articles[0].is_today():
+        api_service.guardian_crawler()
+        api_service.cnn_crawler()
+    yield
+    pass
 
 app = FastAPI(
     title="BriefNews Backend API by Rithwik Mishra",
+    lifespan=lifespan,
     contact={
         "name": "Rithwik Mishra",
         "url": "https://github.com/rithwik-mishra",
-        "email": "mishra.rithwik@gmail.com",
     },
     openapi_tags=[
         {"name": "Routes", "description": "All of the routes used in the BriefNews API"}
@@ -22,42 +35,7 @@ This is the backend API for BriefNews, a news summarization service with a focus
     """,
 )
 
-# Data Models:
-class ArticleURLInput(BaseModel):
-    """Article URL Input Model"""
-    url: Annotated[
-        str, 
-        Field(description="The URL of the news article to summarize. Must be a valid URL.")
-    ]
-
-class ArticleOutput(BaseModel):
-    """Article output model with summary and sentiment analysis"""
-    title: Annotated[
-        str, 
-        Field(description="The title of the original news article")
-    ]
-
-    authors: Annotated[
-        List[str],
-        Field(description="The author(s) of the original news article")
-    ]
-
-    summary: Annotated[
-        str, 
-        Field(description="The summary of the news article")
-    ]
-
-    sentiment: Annotated[
-        Literal["positive", "negative", "neutral"], 
-        Field(description="The sentiment of the news article, measured as positive, negative, or neutral")
-    ]
-
-    url: Annotated[
-        str, 
-        Field(description="The URL of the original news article")
-    ]
-
-APIServiceDI: TypeAlias = Annotated[SummaryAPIService, Depends()]
+APIServiceDI: TypeAlias = Annotated[SummaryAPIService, Depends()] # Dependency Injection for SummaryAPIService
 
 # Routes:
 @app.post(

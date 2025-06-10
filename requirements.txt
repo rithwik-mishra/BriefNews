@@ -15,3 +15,4 @@ lxml==5.4.0
 lxml_html_clean==0.4.2
 newspaper3k==0.2.8
 sqlalchemy==2.0.41
+psycopg2-binary==2.9.6
