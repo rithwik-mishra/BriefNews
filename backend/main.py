@@ -6,14 +6,16 @@ from .services import SummaryAPIService
 from contextlib import asynccontextmanager
 from .models import ArticleURLInput, ArticleOutput
 
+# Create a single instance of the service
+api_service = SummaryAPIService()
+
 # Startup event lifespan to initialize database with current news articles from today
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan event to initialize the application"""
     # Check if articles are present and from todays date, if not crawl and populate the database
-    api_service = SummaryAPIService()
-    if not SummaryAPIService.articles or not SummaryAPIService.articles[0].is_today():
-        api_service.guardian_crawler()
+    if not api_service.is_updated():
+        api_service.npr_crawler()
         api_service.cnn_crawler()
     yield
     pass
@@ -35,7 +37,11 @@ This is the backend API for BriefNews, a news summarization service with a focus
     """,
 )
 
-APIServiceDI: TypeAlias = Annotated[SummaryAPIService, Depends()] # Dependency Injection for SummaryAPIService
+def get_api_service():
+    """Dependency injection function that returns the singleton instance"""
+    return api_service
+
+APIServiceDI: TypeAlias = Annotated[SummaryAPIService, Depends(get_api_service)]
 
 # Routes:
 @app.post(

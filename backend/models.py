@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Annotated, Literal, List
-from datetime import datetime, date
+from datetime import datetime, date as date_type
 
 class ArticleURLInput(BaseModel):
     """Article URL Input Model"""
@@ -35,7 +35,11 @@ class ArticleOutput(BaseModel):
         str, 
         Field(description="The URL of the original news article")
     ]
+
     date: Annotated[
-        datetime, 
-        Field(description="The date of the original news article in YYYY-MM-DD format")
-    ] = datetime.today()
+        date_type,
+        Field(
+            description="The date of the original news article in YYYY-MM-DD format",
+            default_factory=datetime.today().date
+        )
+    ]
