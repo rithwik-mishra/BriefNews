@@ -16,3 +16,8 @@ lxml_html_clean==0.4.2
 newspaper3k==0.2.8
 sqlalchemy==2.0.41
 psycopg2-binary==2.9.6
+gnews==0.4.1
+Cython==3.0.11
+googlenewsdecoder==0.1.7
+pysocks==1.7.1
+selectolax==0.3.30

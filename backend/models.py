@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Annotated, Literal, List
 from datetime import datetime, date as date_type
+from enum import Enum
 
 class ArticleURLInput(BaseModel):
     """Article URL Input Model"""
@@ -43,3 +44,10 @@ class ArticleOutput(BaseModel):
             default_factory=datetime.today().date
         )
     ]
+    
+class TopicEnum(str, Enum):
+    business = "business"
+    technology = "technology"
+    science = "science"
+    health = "health"
+    politics = "politics"

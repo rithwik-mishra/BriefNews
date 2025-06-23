@@ -1,28 +1,17 @@
 """FastAPI main entry point"""
 
-from fastapi import FastAPI, HTTPException, status, Depends
-from typing import Annotated, Literal, TypeAlias, List
+from fastapi import FastAPI, HTTPException, Query, status, Depends
+from typing import Annotated, Literal, TypeAlias, List, Optional
+from enum import Enum
 from .services import SummaryAPIService
 from contextlib import asynccontextmanager
-from .models import ArticleURLInput, ArticleOutput
+from .models import ArticleURLInput, ArticleOutput, TopicEnum
 
 # Create a single instance of the service
 api_service = SummaryAPIService()
 
-# Startup event lifespan to initialize database with current news articles from today
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifespan event to initialize the application"""
-    # Check if articles are present and from todays date, if not crawl and populate the database
-    if not api_service.is_updated():
-        api_service.npr_crawler()
-        api_service.cnn_crawler()
-    yield
-    pass
-
 app = FastAPI(
     title="BriefNews Backend API by Rithwik Mishra",
-    lifespan=lifespan,
     contact={
         "name": "Rithwik Mishra",
         "url": "https://github.com/rithwik-mishra",
@@ -54,8 +43,15 @@ async def summarize_article(api_service: APIServiceDI):
     pass
 
 @app.get("/articles", summary="Gets all articles from the database.", tags=["Routes"])
-async def get_all_articles(api_service: APIServiceDI):
-    return api_service.get_all_articles()
+def get_all_articles(api_service: APIServiceDI, 
+                    topic: Annotated[
+                        Optional[TopicEnum],
+                        Query(
+                            description="Optional topic arguement for news article keyword/subject selection",
+                            enum=[e.value for e in TopicEnum]
+                        )
+                    ] = None):
+    return api_service.get_all_articles(topic)
 
 
 
