@@ -10,6 +10,13 @@ class ArticleURLInput(BaseModel):
         Field(description="The URL of the news article to summarize. Must be a valid URL.")
     ]
 
+class ArticleTextInput(BaseModel):
+    """Article URL Input Model"""
+    text: Annotated[
+        str, 
+        Field(description="The full pasted text of the news article to summarize")
+    ]
+
 class ArticleOutput(BaseModel):
     """Article output model with summary and sentiment analysis"""
     title: Annotated[
@@ -17,19 +24,9 @@ class ArticleOutput(BaseModel):
         Field(description="The title of the original news article")
     ]
 
-    authors: Annotated[
-        List[str],
-        Field(description="The author(s) of the original news article")
-    ]
-
     summary: Annotated[
         str, 
         Field(description="The summary of the news article")
-    ]
-
-    sentiment: Annotated[
-        Literal["positive", "negative", "neutral"], 
-        Field(description="The sentiment of the news article, measured as positive, negative, or neutral")
     ]
 
     url: Annotated[
