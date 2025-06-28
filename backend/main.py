@@ -23,7 +23,6 @@ app = FastAPI(
 This is the backend API for BriefNews, a news summarization service with a focus on providing concise and actionable insights along with sentiment analyses.
 
 ## Features
-
 - **Article Summarization**: Submit article URLs to get AI-generated summaries
 - **Topic-based News**: Get articles filtered by specific topics (business, technology, science, health, politics)
 - **Sentiment Analysis**: Receive sentiment insights along with summaries

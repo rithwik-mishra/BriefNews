@@ -4,6 +4,12 @@ from googlenewsdecoder import new_decoderv1
 from typing import List, Optional
 from .models import ArticleOutput, ArticleURLInput, TopicEnum
 import datetime
+import os
+from huggingface_hub import InferenceClient
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class ArticleUncrawlableError(Exception):
     pass
@@ -11,8 +17,10 @@ class ArticleUncrawlableError(Exception):
 class SummaryAPIService:
     """Summarizer service meant to interface with API to extract article informations, generate a summary, and provide a sentiment analysis."""
 
-    summarizer = None  # Lazy initialization
-    tokenizer = None
+    client = InferenceClient(
+        provider="hf-inference",
+        api_key=os.environ["HF_TOKEN"]
+    )
 
     def crawl_articles(self, topic: Optional[TopicEnum]):
         """Crawl articles from the internet and save them to the database"""
@@ -89,28 +97,20 @@ class SummaryAPIService:
 
     def summarize_text(self, text: str) -> str:
         """Summarize given text using HuggingFace and return the output, truncating input to model's max token length."""
-        if self.summarizer is None:
-            from transformers import AutoTokenizer, pipeline
-            self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
-            self.tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
+        # Clean and validate the text
+        if not text or not text.strip():
+            return "No content available to summarize."
         
-        # Use a conservative max length to avoid position embedding issues
-        # BART's max position embeddings is 1024, but we'll use 1000 to be safe
-        max_input_length = 1000
+        # Remove extra whitespace and normalize
+        text = " ".join(text.split())
         
-        # Tokenize and truncate the text
-        inputs = self.tokenizer(text, return_tensors="pt", truncation=True, max_length=max_input_length)  # type: ignore
-        truncated_text = self.tokenizer.decode(inputs["input_ids"][0], skip_special_tokens=True)  # type: ignore
+        # Truncate text if it's too long (BART model has ~1024 token limit)
+        # Roughly 1 token = 4 characters, so limit to ~4000 characters
+        max_length = 4000
+        if len(text) > max_length:
+            text = text[:max_length] + "..."
         
-        # Ensure the truncated text is not empty
-        if not truncated_text.strip():
-            return "Unable to summarize this article."
-        
-        try:
-            summary = self.summarizer(truncated_text, max_length=130, min_length=30, do_sample=False)
-            return summary[0]["summary_text"] # type: ignore
-        except Exception as e:
-            print(f"Summarization error: {e}")
-            return "Unable to generate summary for this article."
+        result = self.client.summarization(text)
+        return result.summary_text
 
     
