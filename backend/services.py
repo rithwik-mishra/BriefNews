@@ -91,8 +91,8 @@ class SummaryAPIService:
         """Summarize given text using HuggingFace and return the output, truncating input to model's max token length."""
         if self.summarizer is None:
             from transformers import AutoTokenizer, pipeline
-            self.summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-            self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-cnn")
+            self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+            self.tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
         
         # Use a conservative max length to avoid position embedding issues
         # BART's max position embeddings is 1024, but we'll use 1000 to be safe
