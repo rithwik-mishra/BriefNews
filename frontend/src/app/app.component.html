@@ -29,6 +29,12 @@
         </mat-card>
     </div>
 
+    <!-- Theme Toggle Button -->
+    <button mat-fab class="theme-toggle-btn" (click)="toggleTheme()" [matTooltip]="getThemeTooltip()"
+        matTooltipPosition="left">
+        <mat-icon>{{ getThemeIcon() }}</mat-icon>
+    </button>
+
     <!-- Footer -->
     <footer class="app-footer">
         <p>&copy; 2025 BriefNews. AI-powered news summarization. Created by Rithwik Mishra </p>

@@ -1,23 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-/* Custom Dark Theme for BriefNews */
-@import '@angular/material/prebuilt-themes/rose-red.css';
-
-/* Dark theme overrides */
+/* Theme Variables */
 :root {
+    /* Light Theme (Default) */
+    --light-bg: #ffffff;
+    --light-surface: #f5f5f5;
+    --light-card: #ffffff;
+    --light-text: #212121;
+    --light-text-secondary: #666666;
+    --light-border: #e0e0e0;
+    --light-red: #e74c3c;
+    --light-red-light: #ff6b6b;
+    --light-red-dark: #c0392b;
+    --light-gray: #9e9e9e;
+    --light-gray-light: #bdbdbd;
+
+    /* Dark Theme */
     --dark-bg: #1a1a1a;
     --dark-surface: #2a2a2a;
     --dark-card: #3a3a3a;
     --dark-text: #ffffff;
     --dark-text-secondary: #cccccc;
     --dark-border: #505050;
-    --dark-red: #d32f2f;
-    --dark-red-light: #f44336;
-    --dark-red-dark: #b71c1c;
+    --dark-red: #ff8c69;
+    --dark-red-light: #ffa07a;
+    --dark-red-dark: #e67e5a;
     --dark-gray: #555555;
     --dark-gray-light: #777777;
+
+    /* Default to light theme */
+    --bg: var(--light-bg);
+    --surface: var(--light-surface);
+    --card: var(--light-card);
+    --text: var(--light-text);
+    --text-secondary: var(--light-text-secondary);
+    --border: var(--light-border);
+    --red: var(--light-red);
+    --red-light: var(--light-red-light);
+    --red-dark: var(--light-red-dark);
+    --gray: var(--light-gray);
+    --gray-light: var(--light-gray-light);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg: var(--dark-bg);
+    --surface: var(--dark-surface);
+    --card: var(--dark-card);
+    --text: var(--dark-text);
+    --text-secondary: var(--dark-text-secondary);
+    --border: var(--dark-border);
+    --red: var(--dark-red);
+    --red-light: var(--dark-red-light);
+    --red-dark: var(--dark-red-dark);
+    --gray: var(--dark-gray);
+    --gray-light: var(--dark-gray-light);
 }
 
 html,
@@ -27,134 +66,166 @@ body {
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: var(--dark-bg);
-    color: var(--dark-text);
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Override Material theme for dark mode */
+/* Override Material theme for both modes */
 .mat-mdc-card {
-    background-color: var(--dark-card) !important;
-    color: var(--dark-text) !important;
-    border: 1px solid var(--dark-border) !important;
+    background-color: var(--card) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .mat-mdc-toolbar {
-    background: linear-gradient(135deg, var(--dark-red-dark) 0%, var(--dark-red) 100%) !important;
-    color: var(--dark-text) !important;
+    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 100%) !important;
+    color: var(--text) !important;
+    transition: background 0.3s ease;
 }
 
 .mat-mdc-tab-group {
-    background-color: var(--dark-surface) !important;
+    background-color: var(--surface) !important;
+    transition: background-color 0.3s ease;
 }
 
 .mat-mdc-tab-header {
-    background-color: var(--dark-gray) !important;
-    border-bottom: 1px solid var(--dark-border) !important;
+    background-color: var(--gray) !important;
+    border-bottom: 1px solid var(--border) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .mat-mdc-tab-label {
-    color: var(--dark-text-secondary) !important;
+    color: var(--text) !important;
     font-weight: 500 !important;
-    opacity: 0.8 !important;
+    opacity: 0.9 !important;
+    transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .mat-mdc-tab-label-active {
-    color: var(--dark-red-light) !important;
+    color: var(--red-light) !important;
     opacity: 1 !important;
     font-weight: 600 !important;
 }
 
 .mat-mdc-tab-label:hover {
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
     opacity: 1 !important;
 }
 
 .mat-mdc-form-field {
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-form-field-label {
-    color: var(--dark-text-secondary) !important;
+    color: var(--text-secondary) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-input-element {
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-select-value {
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-select-arrow {
-    color: var(--dark-text-secondary) !important;
+    color: var(--text-secondary) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-button {
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-raised-button {
-    background-color: var(--dark-red) !important;
-    color: var(--dark-text) !important;
+    background-color: var(--red) !important;
+    color: var(--text) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mat-mdc-raised-button:hover {
-    background-color: var(--dark-red-light) !important;
+    background-color: var(--red-light) !important;
 }
 
 .mat-mdc-icon-button {
-    color: var(--dark-text-secondary) !important;
+    color: var(--text-secondary) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-menu-panel {
-    background-color: var(--dark-card) !important;
-    border: 1px solid var(--dark-border) !important;
+    background-color: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .mat-mdc-menu-item {
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
+    transition: color 0.3s ease;
 }
 
 .mat-mdc-menu-item:hover {
-    background-color: var(--dark-gray) !important;
+    background-color: var(--gray) !important;
+    transition: background-color 0.3s ease;
 }
 
 .mat-mdc-progress-spinner {
-    color: var(--dark-red) !important;
+    color: var(--red) !important;
+    transition: color 0.3s ease;
+}
+
+/* Form field specific overrides for better contrast */
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-label {
+    color: var(--red) !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-underline {
+    background-color: var(--red) !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-ripple {
+    background-color: var(--red) !important;
 }
 
 /* Snackbar overrides */
 .mat-mdc-snack-bar-container {
-    background-color: var(--dark-card) !important;
-    color: var(--dark-text) !important;
+    background-color: var(--card) !important;
+    color: var(--text) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .success-snackbar {
     background-color: #2e7d32 !important;
-    color: var(--dark-text) !important;
+    color: var(--text) !important;
 }
 
 .error-snackbar {
-    background-color: var(--dark-red) !important;
-    color: var(--dark-text) !important;
+    background-color: var(--red) !important;
+    color: var(--text) !important;
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar for both themes */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--dark-surface);
+    background: var(--surface);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--dark-gray);
+    background: var(--gray);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--dark-gray-light);
+    background: var(--gray-light);
 }

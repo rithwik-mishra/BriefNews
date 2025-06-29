@@ -10,15 +10,17 @@
 
 .tab-header h2 {
     margin: 0 0 8px 0;
-    color: var(--dark-red-light);
+    color: var(--red-light);
     font-size: 2rem;
     font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .tab-header p {
     margin: 0;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
     font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 /* Topic Selection */
@@ -43,7 +45,8 @@
     align-items: center;
     justify-content: center;
     padding: 60px 20px;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .loading-container p {
@@ -63,14 +66,14 @@
     transition: all 0.3s ease;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--dark-border);
-    background: var(--dark-card);
+    border: 1px solid var(--border);
+    background: var(--card);
 }
 
 .article-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-    border-color: var(--dark-red);
+    border-color: var(--red);
 }
 
 .article-title {
@@ -78,14 +81,16 @@
     font-weight: 600 !important;
     line-height: 1.4 !important;
     margin-bottom: 8px !important;
-    color: var(--dark-red-light) !important;
+    color: var(--red-light) !important;
+    transition: color 0.3s ease;
 }
 
 .article-date {
     display: flex !important;
     align-items: center !important;
-    color: var(--dark-text-secondary) !important;
+    color: var(--text-secondary) !important;
     font-size: 0.9rem !important;
+    transition: color 0.3s ease;
 }
 
 .date-icon {
@@ -94,63 +99,72 @@
 }
 
 .article-summary {
-    color: var(--dark-text);
+    color: var(--text);
     line-height: 1.6;
     margin: 16px 0;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: color 0.3s ease;
 }
 
 /* Empty State */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .empty-icon {
     font-size: 4rem;
-    color: var(--dark-gray);
+    color: var(--gray);
     margin-bottom: 16px;
+    transition: color 0.3s ease;
 }
 
 .empty-state h3 {
     margin: 0 0 8px 0;
-    color: var(--dark-text);
+    color: var(--text);
     font-size: 1.5rem;
+    transition: color 0.3s ease;
 }
 
 .empty-state p {
     margin: 0;
     font-size: 1.1rem;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .empty-state button {
     margin-top: 16px;
-    background: var(--dark-red);
-    color: var(--dark-text);
+    background: var(--red);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Error State */
 .error-state {
     text-align: center;
     padding: 60px 20px;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .error-state .error-icon {
     font-size: 4rem;
-    color: var(--dark-red);
+    color: var(--red);
     margin-bottom: 16px;
+    transition: color 0.3s ease;
 }
 
 .error-state h3 {
     margin: 16px 0 8px 0;
-    color: var(--dark-text);
+    color: var(--text);
     font-size: 1.5rem;
+    transition: color 0.3s ease;
 }
 
 .error-state p {
@@ -159,35 +173,40 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .error-state button {
     margin-top: 16px;
-    background: var(--dark-red);
-    color: var(--dark-text);
+    background: var(--red);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Initial State */
 .initial-state {
     text-align: center;
     padding: 3rem 1rem;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 .initial-icon {
     font-size: 4rem;
     width: 4rem;
     height: 4rem;
-    color: var(--dark-gray);
+    color: var(--gray);
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
 
 .initial-state h3 {
     margin: 1rem 0;
-    color: var(--dark-text);
+    color: var(--text);
     font-size: 1.5rem;
     font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .initial-state p {
@@ -196,13 +215,14 @@
     margin-left: auto;
     margin-right: auto;
     line-height: 1.6;
-    color: var(--dark-text-secondary);
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .tab-content {
-        padding: 16px;
+        padding: 24px 16px;
     }
 
     .articles-grid {
