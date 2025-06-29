@@ -118,7 +118,7 @@ def summarize_article(
     },
     tags=["Routes"]
 )
-def get_all_articles(
+async def get_all_articles(
     api_service: APIServiceDI, 
     topic: Annotated[
         Optional[TopicEnum],
@@ -134,7 +134,7 @@ def get_all_articles(
     This endpoint returns a list of news articles with their summaries. 
     You can optionally filter by topic to get articles in specific categories.
     """
-    return api_service.get_all_articles(topic)
+    return await api_service.get_all_articles(topic)
 
 
 
