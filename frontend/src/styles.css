@@ -1,4 +1,160 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Custom Dark Theme for BriefNews */
+@import '@angular/material/prebuilt-themes/rose-red.css';
+
+/* Dark theme overrides */
+:root {
+    --dark-bg: #1a1a1a;
+    --dark-surface: #2a2a2a;
+    --dark-card: #3a3a3a;
+    --dark-text: #ffffff;
+    --dark-text-secondary: #cccccc;
+    --dark-border: #505050;
+    --dark-red: #d32f2f;
+    --dark-red-light: #f44336;
+    --dark-red-dark: #b71c1c;
+    --dark-gray: #555555;
+    --dark-gray-light: #777777;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: var(--dark-bg);
+    color: var(--dark-text);
+    min-height: 100vh;
+}
+
+/* Override Material theme for dark mode */
+.mat-mdc-card {
+    background-color: var(--dark-card) !important;
+    color: var(--dark-text) !important;
+    border: 1px solid var(--dark-border) !important;
+}
+
+.mat-mdc-toolbar {
+    background: linear-gradient(135deg, var(--dark-red-dark) 0%, var(--dark-red) 100%) !important;
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-tab-group {
+    background-color: var(--dark-surface) !important;
+}
+
+.mat-mdc-tab-header {
+    background-color: var(--dark-gray) !important;
+    border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.mat-mdc-tab-label {
+    color: var(--dark-text-secondary) !important;
+    font-weight: 500 !important;
+    opacity: 0.8 !important;
+}
+
+.mat-mdc-tab-label-active {
+    color: var(--dark-red-light) !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+}
+
+.mat-mdc-tab-label:hover {
+    color: var(--dark-text) !important;
+    opacity: 1 !important;
+}
+
+.mat-mdc-form-field {
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-form-field-label {
+    color: var(--dark-text-secondary) !important;
+}
+
+.mat-mdc-input-element {
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-select-value {
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-select-arrow {
+    color: var(--dark-text-secondary) !important;
+}
+
+.mat-mdc-button {
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-raised-button {
+    background-color: var(--dark-red) !important;
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-raised-button:hover {
+    background-color: var(--dark-red-light) !important;
+}
+
+.mat-mdc-icon-button {
+    color: var(--dark-text-secondary) !important;
+}
+
+.mat-mdc-menu-panel {
+    background-color: var(--dark-card) !important;
+    border: 1px solid var(--dark-border) !important;
+}
+
+.mat-mdc-menu-item {
+    color: var(--dark-text) !important;
+}
+
+.mat-mdc-menu-item:hover {
+    background-color: var(--dark-gray) !important;
+}
+
+.mat-mdc-progress-spinner {
+    color: var(--dark-red) !important;
+}
+
+/* Snackbar overrides */
+.mat-mdc-snack-bar-container {
+    background-color: var(--dark-card) !important;
+    color: var(--dark-text) !important;
+}
+
+.success-snackbar {
+    background-color: #2e7d32 !important;
+    color: var(--dark-text) !important;
+}
+
+.error-snackbar {
+    background-color: var(--dark-red) !important;
+    color: var(--dark-text) !important;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gray-light);
+}

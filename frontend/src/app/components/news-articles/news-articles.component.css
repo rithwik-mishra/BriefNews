@@ -1,0 +1,236 @@
+/* Tab Content */
+.tab-content {
+    padding: 32px;
+}
+
+.tab-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.tab-header h2 {
+    margin: 0 0 8px 0;
+    color: var(--dark-red-light);
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.tab-header p {
+    margin: 0;
+    color: var(--dark-text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Topic Selection */
+.topic-selection {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.topic-field {
+    min-width: 200px;
+    max-width: 300px;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--dark-text-secondary);
+}
+
+.loading-container p {
+    margin-top: 16px;
+    font-size: 1.1rem;
+}
+
+/* Articles Grid */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.article-card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--dark-border);
+    background: var(--dark-card);
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    border-color: var(--dark-red);
+}
+
+.article-title {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+    color: var(--dark-red-light) !important;
+}
+
+.article-date {
+    display: flex !important;
+    align-items: center !important;
+    color: var(--dark-text-secondary) !important;
+    font-size: 0.9rem !important;
+}
+
+.date-icon {
+    font-size: 16px !important;
+    margin-right: 4px !important;
+}
+
+.article-summary {
+    color: var(--dark-text);
+    line-height: 1.6;
+    margin: 16px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--dark-text-secondary);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--dark-gray);
+    margin-bottom: 16px;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px 0;
+    color: var(--dark-text);
+    font-size: 1.5rem;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--dark-text-secondary);
+}
+
+.empty-state button {
+    margin-top: 16px;
+    background: var(--dark-red);
+    color: var(--dark-text);
+}
+
+/* Error State */
+.error-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--dark-text-secondary);
+}
+
+.error-state .error-icon {
+    font-size: 4rem;
+    color: var(--dark-red);
+    margin-bottom: 16px;
+}
+
+.error-state h3 {
+    margin: 16px 0 8px 0;
+    color: var(--dark-text);
+    font-size: 1.5rem;
+}
+
+.error-state p {
+    margin: 0 0 24px 0;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--dark-text-secondary);
+}
+
+.error-state button {
+    margin-top: 16px;
+    background: var(--dark-red);
+    color: var(--dark-text);
+}
+
+/* Initial State */
+.initial-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--dark-text-secondary);
+}
+
+.initial-icon {
+    font-size: 4rem;
+    width: 4rem;
+    height: 4rem;
+    color: var(--dark-gray);
+    margin-bottom: 1rem;
+}
+
+.initial-state h3 {
+    margin: 1rem 0;
+    color: var(--dark-text);
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.initial-state p {
+    margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    color: var(--dark-text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tab-content {
+        padding: 16px;
+    }
+
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .topic-selection {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .topic-field {
+        min-width: auto;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .tab-header p {
+        font-size: 1rem;
+    }
+
+    .article-title {
+        font-size: 1.1rem !important;
+    }
+}

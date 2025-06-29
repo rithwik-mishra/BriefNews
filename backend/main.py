@@ -1,6 +1,7 @@
 """FastAPI main entry point"""
 
 from fastapi import FastAPI, HTTPException, Query, status, Depends, Body
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated, TypeAlias, Optional
 from .services import SummaryAPIService, ArticleUncrawlableError
 from .models import ArticleURLInput, TopicEnum, ArticleTextInput, ArticleOutput
@@ -30,6 +31,15 @@ This is the backend API for BriefNews, a news summarization service with a focus
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200", "http://localhost:3000"],  # Angular dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 def get_api_service():

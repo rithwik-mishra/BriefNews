@@ -5,11 +5,10 @@
         4200,
         8000
     ],
-    "postCreateCommand": "pip3 install -r requirements.txt && npm install && ng config -g cli.warnings.versionMismatch false",
     "remoteUser": "vscode",
     "runArgs": [
         "--env-file",
-        ".env"
+        "./.env"
     ],
     "customizations": {
         "vscode": {

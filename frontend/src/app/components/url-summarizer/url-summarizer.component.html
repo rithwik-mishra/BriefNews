@@ -1,0 +1,82 @@
+<div class="tab-content">
+    <div class="tab-header">
+        <h2>URL Summarizer</h2>
+        <p>Paste a news article URL to get an AI-generated summary</p>
+    </div>
+
+    <!-- URL Input Form -->
+    <form [formGroup]="urlForm" (ngSubmit)="summarizeUrl()" class="url-form">
+        <mat-form-field appearance="outline" class="url-field">
+            <mat-label>Article URL</mat-label>
+            <input matInput formControlName="url" placeholder="https://example.com/article" />
+            <mat-icon matSuffix>link</mat-icon>
+            <mat-error *ngIf="urlForm.get('url')?.hasError('required')">
+                URL is required
+            </mat-error>
+            <mat-error *ngIf="urlForm.get('url')?.hasError('pattern')">
+                Please enter a valid URL starting with http:// or https://
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="urlForm.invalid || summarizing()">
+                <mat-icon>summarize</mat-icon>
+                {{ summarizing() ? 'Summarizing...' : 'Summarize' }}
+            </button>
+            <button mat-stroked-button type="button" (click)="clearForm()" [disabled]="summarizing()">
+                <mat-icon>clear</mat-icon>
+                Clear
+            </button>
+        </div>
+    </form>
+
+    <!-- Loading State -->
+    @if (summarizing()) {
+    <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Analyzing article and generating summary...</p>
+    </div>
+    }
+
+    <!-- Error State -->
+    @if (showError()) {
+    <div class="error-state">
+        <mat-icon class="error-icon">error</mat-icon>
+        <h3>Failed to summarize article</h3>
+        <p>{{error()}}</p>
+        <button mat-raised-button color="primary" (click)="summarizeUrl()" [disabled]="urlForm.invalid">
+            <mat-icon>refresh</mat-icon>
+            Try Again
+        </button>
+    </div>
+    }
+
+    <!-- Summary Result -->
+    @if (showResult()) {
+    <div class="summary-result">
+        <div class="result-header">
+            <h3>Article Summary</h3>
+            <div class="result-actions">
+                <button mat-icon-button (click)="copyToClipboard(summaryResult())" matTooltip="Copy summary">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+                <button mat-icon-button (click)="clearSummary()" matTooltip="Clear summary">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="summary-content">
+            <p>{{summaryResult()}}</p>
+        </div>
+    </div>
+    }
+
+    <!-- Initial State -->
+    @if (showInitialState()) {
+    <div class="initial-state">
+        <mat-icon class="initial-icon">summarize</mat-icon>
+        <h3>Ready to summarize</h3>
+        <p>Enter a news article URL above and click "Summarize" to get an AI-generated summary.</p>
+    </div>
+    }
+</div>
