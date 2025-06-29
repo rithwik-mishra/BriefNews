@@ -36,7 +36,7 @@ This is the backend API for BriefNews, a news summarization service with a focus
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200", "https://brief-news.vercel.app/"],  # Angular dev server
+    allow_origins=["http://localhost:4200", "https://brief-news.vercel.app"],  # Angular dev server and Vercel deployment
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

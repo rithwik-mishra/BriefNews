@@ -1,36 +1,62 @@
 # BriefNews - AI-Powered News Summarization
 
-A modern web application that provides AI-powered news summarization with a sleek Angular Material frontend and FastAPI backend.
+A modern web application that provides AI-powered news summarization with a sleek Angular Material frontend and FastAPI backend. Built with the latest technologies and designed for optimal user experience.
 
-## Features
+## 🌟 Features
 
-- **News Articles Tab**: Browse and read summaries of the latest news articles by topic
-- **URL Summarization Tab**: Paste any news article URL to get an AI-generated summary
-- **Topic Filtering**: Filter articles by business, technology, science, health, or politics
-- **Responsive Design**: Beautiful, modern UI that works on all devices
-- **Real-time Summarization**: Instant AI-powered article summaries
+### 📰 News Articles
+- **Topic-based Filtering**: Browse news articles by categories including Business, Technology, Science, Health, and Politics
+- **AI-Generated Summaries**: Each article comes with a concise, AI-generated summary highlighting key points
+- **Interactive Interface**: Modern card-based layout with loading states, error handling, and empty states
+- **Article Actions**: Copy article URLs and open full articles in new tabs
 
-## Tech Stack
+### 🔗 URL Summarization
+- **Custom Article Summarization**: Paste any news article URL to get an instant AI-generated summary
+- **Real-time Processing**: Live feedback during summarization with progress indicators
+- **Error Handling**: Comprehensive error handling for invalid URLs or processing issues
+- **Copy & Share**: Easy copying of summaries for sharing or note-taking
+
+### 🎨 User Experience
+- **Dark/Light Theme**: Toggle between dark and light themes with system preference detection
+- **Responsive Design**: Fully responsive interface that works on desktop, tablet, and mobile
+- **Material Design**: Modern UI components with smooth animations and transitions
+- **Accessibility**: Built with accessibility in mind using Angular Material components
+
+### 🚀 Technical Features
+- **Angular 19**: Latest Angular framework with standalone components
+- **Angular Material**: Professional UI components and theming
+- **Reactive State Management**: Using Angular signals for efficient state management
+- **TypeScript**: Full type safety throughout the application
+- **RESTful API Integration**: Seamless integration with FastAPI backend
+
+## 🛠️ Tech Stack
 
 ### Backend
-- **FastAPI**: Modern Python web framework
-- **HuggingFace**: AI summarization models
-- **GNews**: News article crawling
-- **Pydantic**: Data validation
+- **FastAPI**: Modern Python web framework with automatic API documentation
+- **HuggingFace**: AI summarization models for intelligent content processing
+- **GNews**: News article crawling and aggregation
+- **Pydantic**: Data validation and serialization
 
 ### Frontend
-- **Angular 19**: Latest Angular framework
-- **Angular Material**: Material Design components
-- **TypeScript**: Type-safe JavaScript
-- **Responsive CSS**: Modern, mobile-first design
+- **Angular 19**: Angular framework with standalone components
+- **Angular Material 19.2**: Material Design component library
+- **TypeScript 5.7.2**: Type-safe JavaScript development
+- **RxJS 7.8.0**: Reactive programming for state management
+- **Angular CDK 19.2.19**: Component development kit
 
-## Prerequisites
+## 🚀 Live Demo
 
-- Python 3.8+
-- Node.js 18+
+- **Frontend**: [https://brief-news.vercel.app/](https://brief-news.vercel.app/)
+- **Backend API**: [https://briefnews.onrender.com/](https://briefnews.onrender.com/)
+- **API Documentation**: [https://briefnews.onrender.com/docs](https://briefnews.onrender.com/docs)
+
+## 📋 Prerequisites
+
+- Python 3.11+
+- Node.js 20+
 - HuggingFace API token
 
-## Setup Instructions
+## 🛠️ Setup Instructions
 
 ### 1. Backend Setup
 
@@ -48,7 +74,7 @@ echo "HF_TOKEN=your_huggingface_token_here" > .env
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The backend will be available at `https://briefnews.onrender.com/`
+The locally hosted backend will be available at `http://localhost:8000`
 
 ### 2. Frontend Setup
 
@@ -60,12 +86,12 @@ cd frontend
 npm install
 
 # Start the development server
-npm start
+npx ng serve --host="0.0.0.0"
 ```
 
-The frontend will be available at `http://localhost:4200`
+The locally-hosted frontend will be available at `http://localhost:4200/`
 
-## API Endpoints
+## 🔌 API Endpoints
 
 ### GET /articles
 Get news articles with summaries, optionally filtered by topic.
@@ -100,46 +126,36 @@ Summarize an article from its URL.
 AI-generated summary of the article...
 ```
 
-## Environment Variables
+## 🔧 Environment Variables
 
 ### Backend (.env file)
-- `HF_TOKEN`: Your HuggingFace API token
+- `HF_TOKEN`: Your HuggingFace API token for AI summarization
 
-## Deployment
 
-### Backend (Render/Heroku)
-1. Set environment variables in your cloud platform
-2. Deploy the backend code
-3. Update the frontend API base URL
-
-### Frontend (Vercel/Netlify)
-1. Build the project: `npm run build`
-2. Deploy the `dist` folder
-3. Update the API base URL for production
-
-## Development
-
-### Backend Development
-- API documentation: `https://briefnews.onrender.com/docs`
-- ReDoc documentation: `https://briefnews.onrender.com/redoc`
-
-### Frontend Development
-- Hot reload enabled
-- TypeScript compilation
-- Material Design components
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📝 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Author
+## 👨‍💻 Author
 
-Rithwik Mishra - [GitHub](https://github.com/rithwik-mishra)
+**Rithwik Mishra**
+- GitHub: [@rithwik-mishra](https://github.com/rithwik-mishra)
+
+## 🙏 Acknowledgments
+
+- Built with [Angular](https://angular.io/) and [Angular Material](https://material.angular.io/)
+- Backend powered by [FastAPI](https://fastapi.tiangolo.com/)
+- Deployed on [Vercel](https://vercel.com/) and [Render](https://render.com/)
+- AI summarization powered by [HuggingFace](https://huggingface.co/)
+
+---
+
+**BriefNews** - Making news consumption smarter, one summary at a time. 📰✨
