@@ -6,9 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "build:ssr": "ng build --configuration production",
+    "vercel-build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:briefnews": "node dist/briefnews/server/server.mjs"
+    "serve:ssr:briefnews": "node dist/frontend/server/server.mjs"
   },
   "private": true,
   "dependencies": {
