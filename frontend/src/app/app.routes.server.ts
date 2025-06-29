@@ -1,8 +1,2 @@
-import { RenderMode, ServerRoute } from '@angular/ssr';
-
-export const serverRoutes: ServerRoute[] = [
-  {
-    path: '**',
-    renderMode: RenderMode.Prerender
-  }
-];
+// No server routes configuration needed for default SSR behavior
+export const serverRoutes = [];
