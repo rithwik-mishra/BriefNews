@@ -147,7 +147,7 @@ class SummaryAPIService:
         if len(text) > max_length:
             text = text[:max_length] + "..."
         
-        result = await self.async_client.summarization(text)
+        result = await self.async_client.summarization(text, model="sshleifer/distilbart-cnn-12-6")
         return result.summary_text
 
     def summarize_text(self, text: str) -> str:
@@ -165,7 +165,7 @@ class SummaryAPIService:
         if len(text) > max_length:
             text = text[:max_length] + "..."
         
-        result = self.client.summarization(text)
+        result = self.client.summarization(text, model="sshleifer/distilbart-cnn-12-6")
         return result.summary_text
 
     
