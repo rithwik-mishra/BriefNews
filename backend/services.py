@@ -65,9 +65,30 @@ class SummaryAPIService:
             try:
                 url = article['url']
                 
-                # Decode URL concurrently
-                decoded_url_result = await decode_url(url)
-                decoded_url = decoded_url_result['decoded_url']
+                # Decode URL concurrently with proper error handling
+                try:
+                    decoded_url_result = await decode_url(url)
+                    
+                    # Debug logging for Render deployment
+                    print(f"Debug - decoded_url_result type: {type(decoded_url_result)}")
+                    print(f"Debug - decoded_url_result value: {decoded_url_result}")
+                    
+                    # Handle different return types from new_decoderv1
+                    if decoded_url_result is None:
+                        decoded_url = url  # Fallback to original URL
+                        print(f"Debug - Using fallback URL: {decoded_url}")
+                    elif isinstance(decoded_url_result, dict) and 'decoded_url' in decoded_url_result:
+                        decoded_url = decoded_url_result['decoded_url']
+                        print(f"Debug - Using decoded URL from dict: {decoded_url}")
+                    elif isinstance(decoded_url_result, str):
+                        decoded_url = decoded_url_result
+                        print(f"Debug - Using decoded URL as string: {decoded_url}")
+                    else:
+                        decoded_url = url  # Fallback to original URL
+                        print(f"Debug - Using fallback URL (unknown type): {decoded_url}")
+                except Exception as decode_error:
+                    print(f"Debug - Error decoding URL {url}: {str(decode_error)}")
+                    decoded_url = url  # Fallback to original URL
                 
                 # Fetch article concurrently
                 thisArticle = await fetch_article(decoded_url)
