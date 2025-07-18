@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { SummarizerService } from '../../services/summarizer.service';
+import { Theme, ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-url-summarizer',
@@ -49,13 +50,19 @@ export class UrlSummarizerComponent {
     !this.error()
   );
 
+  public currentTheme: Theme = 'dark';
+
   constructor(
     private fb: FormBuilder,
     private summarizerService: SummarizerService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private themeService: ThemeService
   ) {
     this.urlForm = this.fb.group({
       url: ['', [Validators.required, Validators.pattern('https?://.+')]]
+    });
+    this.themeService.theme$.subscribe(theme => {
+      this.currentTheme = theme;
     });
   }
 

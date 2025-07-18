@@ -50,7 +50,7 @@
     @if (!loading() && articles().length > 0 && !error()) {
     <div class="articles-grid">
         @for (article of articles(); track article.url) {
-        <mat-card class="article-card">
+        <mat-card class="article-card" (click)="openArticlePopup(article)" tabindex="0" style="cursor:pointer;">
             <mat-card-header>
                 <mat-card-title class="article-title">{{article.title}}</mat-card-title>
                 <mat-card-subtitle class="article-date">
@@ -106,6 +106,43 @@
             <mat-icon>refresh</mat-icon>
             Refresh
         </button>
+    </div>
+    }
+
+    @if (selectedArticle()) {
+    <div class="article-popup-backdrop" (click)="closeArticlePopup()">
+        <div class="article-popup-card" (click)="$event.stopPropagation()">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title class="article-title">{{selectedArticle()!.title}}</mat-card-title>
+                    <mat-card-subtitle class="article-date">
+                        <mat-icon class="date-icon">schedule</mat-icon>
+                        {{selectedArticle()!.date | date:'mediumDate'}}
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="article-summary-full">{{selectedArticle()!.summary}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a mat-button color="primary" [href]="selectedArticle()!.url" target="_blank">
+                        <mat-icon>open_in_new</mat-icon>
+                        Read Full Article
+                    </a>
+                    <button mat-icon-button [matMenuTriggerFor]="popupMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #popupMenu="matMenu">
+                        <button mat-menu-item (click)="copyToClipboard(selectedArticle()!.url)">
+                            <mat-icon>content_copy</mat-icon>
+                            Copy URL
+                        </button>
+                    </mat-menu>
+                    <span class="popup-close" (click)="closeArticlePopup()" matTooltip="Close">
+                        <mat-icon>close</mat-icon>
+                    </span>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
     }
 </div>

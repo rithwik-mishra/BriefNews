@@ -65,7 +65,7 @@
                 </button>
             </div>
         </div>
-        <div class="summary-content">
+        <div class="summary-content" [ngStyle]="currentTheme === 'light' ? {'background':'#fff','color':'#222'} : {}">
             <p>{{summaryResult()}}</p>
         </div>
     </div>

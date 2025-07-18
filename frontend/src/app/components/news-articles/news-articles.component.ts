@@ -39,6 +39,7 @@ export class NewsArticlesComponent implements OnInit {
   loading = signal<boolean>(false);
   error = signal<string>('');
   hasLoadedOnce = signal<boolean>(false);
+  selectedArticle = signal<Article | null>(null);
 
   // Computed values
   showEmptyState = computed(() =>
@@ -122,5 +123,13 @@ export class NewsArticlesComponent implements OnInit {
       verticalPosition: 'bottom',
       panelClass: type === 'success' ? ['success-snackbar'] : ['error-snackbar']
     });
+  }
+
+  openArticlePopup(article: Article): void {
+    this.selectedArticle.set(article);
+  }
+
+  closeArticlePopup(): void {
+    this.selectedArticle.set(null);
   }
 }
